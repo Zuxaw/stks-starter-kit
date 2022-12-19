@@ -12,7 +12,7 @@ function Index() {
 
   return (
     <>
-      <Head title="TOP PAGE" />
+      <Head title="Home" />
       <div className="hero min-h-screen">
         <div className="text-center hero-content">
           <div>

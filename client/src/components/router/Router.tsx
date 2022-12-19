@@ -1,6 +1,7 @@
 import { Dialog } from '@headlessui/react';
 import { lazy, Suspense, useState } from 'react';
 import { Outlet, RouteObject, useRoutes, BrowserRouter } from 'react-router-dom';
+import UserIcon from '../domain/auth/UserIcon';
 
 const Loading = () => <p className="p-4 w-full h-full text-center">Loading...</p>;
 
@@ -12,6 +13,7 @@ function Layout() {
     <div>
       <nav className="p-4 flex items-center justify-between">
         <span>Header</span>
+        <UserIcon />
       </nav>
       <Outlet />
     </div>

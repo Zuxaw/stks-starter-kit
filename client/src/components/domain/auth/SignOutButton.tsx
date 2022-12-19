@@ -1,8 +1,10 @@
+import { useMutation } from "react-query";
 import { useAuth } from "~/lib/firebase";
 
 type Props = {};
 
 export const SignOutButton = (props: Props) => {
+
   const handleClick = () => {
     const auth = useAuth();
     auth.signOut();

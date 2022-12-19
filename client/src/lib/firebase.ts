@@ -1,5 +1,5 @@
 import { FirebaseApp, initializeApp } from 'firebase/app';
-import { getAuth, Auth, connectAuthEmulator } from 'firebase/auth';
+import { getAuth, Auth, connectAuthEmulator, onAuthStateChanged, User } from 'firebase/auth';
 import { connectFirestoreEmulator, getFirestore } from "firebase/firestore";
 import { connectStorageEmulator, getStorage } from "firebase/storage";
 
@@ -53,3 +53,17 @@ export const useStorage = () => {
   }
   return storage;
 };
+
+export const getUser = (): Promise<User | null> => {
+  const auth = useAuth();
+  return new Promise((resolve, reject) => {
+      onAuthStateChanged(auth,(user) => {
+          if (user) {
+              resolve(user);
+          } else {
+              reject(new Error('No user signed in'));
+          }
+      });
+  });
+}
+
