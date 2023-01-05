@@ -1,7 +1,7 @@
 import { FirebaseApp, initializeApp } from 'firebase/app';
 import { getAuth, Auth, connectAuthEmulator, onAuthStateChanged, User } from 'firebase/auth';
-import { connectFirestoreEmulator, getFirestore } from "firebase/firestore";
-import { connectStorageEmulator, getStorage } from "firebase/storage";
+import { connectFirestoreEmulator, getFirestore } from 'firebase/firestore';
+import { connectStorageEmulator, getStorage } from 'firebase/storage';
 
 let firebaseApp: FirebaseApp;
 const useEmulator = () => import.meta.env.VITE_USE_FIREBASE_EMULATOR;
@@ -18,7 +18,7 @@ export const setupFirebase = () => {
       appId: import.meta.env.VITE_FIREBASE_APPID,
     });
   } catch (error) {
-    console.error({error})
+    console.error({ error });
   }
 };
 
@@ -57,13 +57,12 @@ export const useStorage = () => {
 export const getUser = (): Promise<User | null> => {
   const auth = useAuth();
   return new Promise((resolve, reject) => {
-      onAuthStateChanged(auth,(user) => {
-          if (user) {
-              resolve(user);
-          } else {
-              reject(new Error('No user signed in'));
-          }
-      });
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        resolve(user);
+      } else {
+        reject(new Error('No user signed in'));
+      }
+    });
   });
-}
-
+};
