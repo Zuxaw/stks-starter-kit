@@ -40,7 +40,7 @@ const InnerRouter = () => {
       children: [
         {
           index: true,
-          element: connected ? <Dashboard /> : <RedirectTo url="/" />,
+          element: <Dashboard />,
         },
         {
           path: '*',

@@ -1,5 +1,6 @@
 import Avvvatars from 'avvvatars-react';
 import { User } from 'firebase/auth';
+import { useState } from 'react';
 import { useQuery } from 'react-query';
 import { Outlet, useNavigate } from 'react-router-dom';
 import { getUser, useAuth } from '~/lib/firebase';
@@ -7,6 +8,8 @@ import { getUser, useAuth } from '~/lib/firebase';
 const DashboardHeader = () => {
   const { data, isLoading } = useQuery<User | null, Error>('user', getUser);
   const navigate = useNavigate();
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
   const handleClick = () => {
     const auth = useAuth();
     auth.signOut();
@@ -18,7 +21,7 @@ const DashboardHeader = () => {
       <div className="navbar m-2">
         <div className="navbar-start">
           <div className="dropdown">
-            <label tabIndex={0} className="btn btn-ghost btn-square">
+            <label tabIndex={0} className="btn btn-ghost btn-square" onClick={() => setIsDropdownOpen(!isDropdownOpen)}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-5 w-5"
@@ -29,20 +32,31 @@ const DashboardHeader = () => {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h7" />
               </svg>
             </label>
-            <ul
-              tabIndex={0}
-              className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
-            >
-              <li>
-                <a>Homepage</a>
-              </li>
-              <li>
-                <a>Portfolio</a>
-              </li>
-              <li>
-                <a>About</a>
-              </li>
-            </ul>
+            {isDropdownOpen && (
+              <ul
+                tabIndex={0}
+                className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
+              >
+                <li>
+                  <a>
+                    <i className="fas fa-home mr-5" />
+                    Home
+                  </a>
+                </li>
+                <li>
+                  <a>
+                    <i className="fas fa-user mr-5" />
+                    Portfolio
+                  </a>
+                </li>
+                <li>
+                  <a>
+                    <i className="fas fa-envelope mr-5" />
+                    Messages
+                  </a>
+                </li>
+              </ul>
+            )}
           </div>
           <div className="flex-1">
             <a className="btn btn-ghost normal-case text-xl">STKS</a>
@@ -50,7 +64,11 @@ const DashboardHeader = () => {
         </div>
         <div className="flex-none gap-2 navbar-end">
           <div className="dropdown dropdown-end">
-            <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+            <label
+              tabIndex={0}
+              className="btn btn-ghost btn-circle avatar"
+              onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+            >
               {!isLoading ? (
                 <div className="w-10 rounded-full">
                   {!data?.photoURL ? (
@@ -65,19 +83,25 @@ const DashboardHeader = () => {
                 </div>
               )}
             </label>
-            <ul
-              tabIndex={0}
-              className="mt-5 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52"
-            >
-              <li>
-                <a>Settings</a>
-              </li>
-              <li>
-                <a className="hover:bg-red-500 hover:text-white" onClick={handleClick}>
-                  Logout
-                </a>
-              </li>
-            </ul>
+            {isDropdownOpen && (
+              <ul
+                tabIndex={0}
+                className="mt-5 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52"
+              >
+                <li>
+                  <a>
+                    <i className="fa-solid fa-gear mr-5" />
+                    Settings
+                  </a>
+                </li>
+                <li>
+                  <a className="hover:bg-red-500 hover:text-white" onClick={handleClick}>
+                    <i className="fas fa-sign-out-alt mr-5" />
+                    Logout
+                  </a>
+                </li>
+              </ul>
+            )}
           </div>
         </div>
       </div>
