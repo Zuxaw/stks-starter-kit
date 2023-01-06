@@ -34,6 +34,16 @@ export const useAuth = () => {
   return auth;
 };
 
+export const isAuth = (): boolean => {
+  try {
+    const auth = useAuth();
+    return auth.currentUser !== null;
+  } catch (error) {
+    return false;
+  }
+};
+
+
 export const useFirestore = () => {
   if (!firestore) {
     firestore = getFirestore();

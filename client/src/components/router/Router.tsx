@@ -1,15 +1,14 @@
 import { lazy, Suspense } from 'react';
 import { RouteObject, useRoutes, BrowserRouter } from 'react-router-dom';
+import { isAuth } from '~/lib/firebase';
 import DashboardHeader from '../header/DashboardHeader';
 import Dashboard from '../screens/dashboard/dashboard';
+import RedirectTo from './RedirectTo';
 
 const Loading = () => <p className="p-4 w-full h-full text-center">Loading...</p>;
 
 const IndexScreen = lazy(() => import('~/components/screens/Index'));
 const Page404Screen = lazy(() => import('~/components/screens/404'));
-
-
-
 
 export const Router = () => {
   return (
@@ -20,6 +19,7 @@ export const Router = () => {
 };
 
 const InnerRouter = () => {
+  const connected = isAuth()
   const routes: RouteObject[] = [
     {
       path: '/',
@@ -40,7 +40,7 @@ const InnerRouter = () => {
       children: [
         {
           index: true,
-          element: <Dashboard />,
+          element: connected ? <Dashboard /> : <RedirectTo url="/" />,
         },
         {
           path: '*',

@@ -7,9 +7,6 @@ import { Head } from '~/components/shared/Head';
 import './index.scss';
 
 function Index() {
-  const { state } = useAuthState();
-  const [isOpen, setIsOpen] = useState(true);
-  const completeButtonRef = useRef(null);
 
   return (
     <>

@@ -1,11 +1,9 @@
-import {Head} from "~/components/shared/Head";
 
 function Dashboard() {
   return (
     <>
-      <Head title={'The page is not found'}></Head>
-      <div className="hero h-screen">
-        <div className="text-center hero-content text-3xl font-bold">
+      <div className="hero">
+        <div className="text-center text-3xl font-bold">
           <div>
             <h1>
               Hello world
