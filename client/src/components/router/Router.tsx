@@ -2,13 +2,13 @@ import { lazy, Suspense } from 'react';
 import { RouteObject, useRoutes, BrowserRouter } from 'react-router-dom';
 import { isAuth } from '~/lib/firebase';
 import DashboardHeader from '../header/DashboardHeader';
-import Dashboard from '../screens/dashboard/dashboard';
+import Dashboard from '../../screens/dashboard/dashboard';
 import RedirectTo from './RedirectTo';
 
 const Loading = () => <p className="p-4 w-full h-full text-center">Loading...</p>;
 
-const IndexScreen = lazy(() => import('~/components/screens/Index'));
-const Page404Screen = lazy(() => import('~/components/screens/404'));
+const IndexScreen = lazy(() => import('~/screens/Index'));
+const Page404Screen = lazy(() => import('~/screens/404'));
 
 export const Router = () => {
   return (
@@ -36,7 +36,7 @@ const InnerRouter = () => {
     },
     {
       path: '/home',
-      element: <DashboardHeader />,
+      // element: <DashboardHeader />,
       children: [
         {
           index: true,

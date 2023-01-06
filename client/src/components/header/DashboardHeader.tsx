@@ -17,8 +17,8 @@ const DashboardHeader = () => {
   };
 
   return (
-    <div>
-      <div className="navbar m-2">
+    <div className='sticky top-0 bg-base-100 z-50'>
+      <div className="navbar mb-2 ">
         <div className="navbar-start">
           <div className="dropdown">
             <label tabIndex={0} className="btn btn-ghost btn-square" onClick={() => setIsDropdownOpen(!isDropdownOpen)}>
@@ -35,7 +35,7 @@ const DashboardHeader = () => {
             {isDropdownOpen && (
               <ul
                 tabIndex={0}
-                className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
+                className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-40"
               >
                 <li>
                   <a>
@@ -63,6 +63,17 @@ const DashboardHeader = () => {
           </div>
         </div>
         <div className="flex-none gap-2 navbar-end">
+          <div>
+            <select data-choose-theme className="select select-bordered w-full max-w-xs">
+            <option disabled selected>Theme</option>
+              <option value="light">Light</option>
+              <option value="dark">Dark</option>
+              <option value="bumblebee">Bumblebee</option>
+              <option value="emerald">Emerald</option>
+              <option value="corporate">Corporate</option>
+              <option value="synthwave">Synthwave</option>
+            </select>
+          </div>
           <div className="dropdown dropdown-end">
             <label
               tabIndex={0}
@@ -86,7 +97,7 @@ const DashboardHeader = () => {
             {isDropdownOpen && (
               <ul
                 tabIndex={0}
-                className="mt-5 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52"
+                className="mt-2 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52"
               >
                 <li>
                   <a>

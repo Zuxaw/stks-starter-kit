@@ -1,4 +1,3 @@
-
 module.exports = {
   mode: 'jit',
   purge: {
@@ -8,24 +7,50 @@ module.exports = {
   },
   theme: {
     minWidth: {
-      '40': '10rem',
-      '60': '15rem',
-      '80': '20rem',
-      '100': '25rem',
+      40: '10rem',
+      60: '15rem',
+      80: '20rem',
+      100: '25rem',
     },
     maxWidth: {
-      '120': '30rem',
-      '160': '40rem',
-      '200': '50rem',
-    }
+      120: '30rem',
+      160: '40rem',
+      200: '50rem',
+    },
   },
   variants: {},
-  plugins: [
-    require('daisyui'),
-  ],
+  plugins: [require('daisyui')],
   daisyui: {
     themes: [
       'light',
+      'dark',
+      'cupcake',
+      'bumblebee',
+      'emerald',
+      'corporate',
+      'synthwave',
+      'retro',
+      'cyberpunk',
+      'valentine',
+      'halloween',
+      'garden',
+      'forest',
+      'aqua',
+      'lofi',
+      'pastel',
+      'fantasy',
+      'wireframe',
+      'black',
+      'luxury',
+      'dracula',
+      'cmyk',
+      'autumn',
+      'business',
+      'acid',
+      'lemonade',
+      'night',
+      'coffee',
+      'winter',
     ],
-  }
-}
+  },
+};
