@@ -5,17 +5,13 @@ type Tab = {
   content: JSX.Element;
 };
 
-const TabsCard = () => {
+
+const TabsCard: React.FC<{ tabs: Tab[] }> = ({ tabs }) => {
   const [activeTab, setActiveTab] = useState(0);
 
   const handleTabClick = (tabIndex: number) => {
     setActiveTab(tabIndex);
   };
-
-  const tabs: Tab[] = [
-    { label: '🚀 Trend', content: <p>Content for preview tab</p> },
-    { label: 'Suggestion', content: <p>Content for HTML tab</p> },
-  ];
 
   return (
     <div className="grid items-start">

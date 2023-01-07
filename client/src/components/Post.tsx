@@ -1,39 +1,64 @@
 import { useState } from 'react';
 
+type PostProps = {
+  id: number;
+  content: string;
+  images?: string[];
+  likes: number;
+  shares: number;
+  comments: number;
+  author: string;
+  createdAt: string;
+};
 
-const Post = () => {
+const Post: React.FC<{ posts: PostProps[] }> = ({ posts }) => {
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
 
   const handleImageClick = () => {
     setIsPopoverOpen(!isPopoverOpen);
   };
   return (
-    <div className="card card-compact w-full h-96 mt-5 bg-base-100 shadow-xl border border-base-300">
-      <div className="card-body">
-        <h2 className="card-title">Shoes!</h2>
-        <p>If a dog chews shoes whose shoes does he choose?</p>
-        <img
-          src="https://placeimg.com/400/225/arch"
-          className="h-52 mt-2 rounded-lg"
-          onClick={handleImageClick}
-          style={{ objectFit: 'cover' }}
-        />
-        <div className="card-actions justify-end">
-          <button className="btn btn-primary">
-            <i className="fas fa-heart mr-2" />
-            Like
-          </button>
-          <button className="btn btn-primary">
-            <i className="fas fa-paper-plane mr-2" />
-            Share
-          </button>
-          <button className="btn btn-primary">
-            <i className="fa-solid fa-comment mr-2"></i>
-            Comments
-          </button>
+    <>
+      {posts.map((post) => (
+        <div className="card card-compact w-full mt-5 bg-base-100 shadow-xl border border-base-300">
+          <div className="card-body ">
+            <p className="prose">{post.content}</p>
+            {post.images && post.images.length > 0 && (
+              <div className="mt-4 flex flex-wrap items-center justify-center">
+                {post.images && post.images.length > 0 && (
+                  <div className="flex flex-wrap items-center justify-center mt-4">
+                    {post.images.map((image, index) => (
+                      <img
+                        key={index}
+                        src={image}
+                        className="h-52 w-64 rounded-lg m-1"
+                        onClick={handleImageClick}
+                        style={{ objectFit: 'cover' }}
+                      />
+                    ))}
+                  </div>
+                )}
+              </div>
+            )}
+
+            <div className="card-actions justify-end">
+              <button className="text-base mr-4">
+                <i className="fas fa-heart mr-2" />
+                {post.likes}
+              </button>
+              <button className="text-base mr-4">
+                <i className="fa-solid fa-share mr-2"></i>
+                {post.shares}
+              </button>
+              <button className="text-base mr-4">
+                <i className="fa-solid fa-comment mr-2"></i>
+                {post.comments}
+              </button>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
+      ))}
+    </>
   );
 };
 

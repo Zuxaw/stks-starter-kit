@@ -17,8 +17,8 @@ const DashboardHeader = () => {
   };
 
   return (
-    <div className='sticky top-0 bg-base-100 z-50'>
-      <div className="navbar mb-2 ">
+    <div className='sticky top-0 bg-base-100 z-50 mb-2'>
+      <div className="navbar">
         <div className="navbar-start">
           <div className="dropdown">
             <label tabIndex={0} className="btn btn-ghost btn-square" onClick={() => setIsDropdownOpen(!isDropdownOpen)}>
@@ -35,7 +35,7 @@ const DashboardHeader = () => {
             {isDropdownOpen && (
               <ul
                 tabIndex={0}
-                className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-40"
+                className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
               >
                 <li>
                   <a>
@@ -85,7 +85,7 @@ const DashboardHeader = () => {
                   {!data?.photoURL ? (
                     <Avvvatars value={data?.email || 'error'} size={40} />
                   ) : (
-                    <img src={data.photoURL} />
+                    <img src={data.photoURL} referrerPolicy="no-referrer"  />
                   )}
                 </div>
               ) : (
