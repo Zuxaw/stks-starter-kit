@@ -19,7 +19,7 @@ function Dashboard() {
                 {
                   id: 1,
                   content: 'Hello world',
-                  author: 'John Doe',
+                  user: 'John Doe',
                   createdAt: '2021-01-01',
                   likes: 0,
                   shares: 0,
@@ -29,7 +29,7 @@ function Dashboard() {
                 {
                   id: 2,
                   content: 'Hello world',
-                  author: 'John Doe',
+                  user: 'John Doe',
                   createdAt: '2021-01-01',
                   likes: 0,
                   shares: 0,
@@ -38,7 +38,7 @@ function Dashboard() {
                 {
                   id: 3,
                   content: 'Hello world',
-                  author: 'John Doe',
+                  user: 'John Doe',
                   createdAt: '2021-01-01',
                   likes: 0,
                   shares: 0,
@@ -47,7 +47,7 @@ function Dashboard() {
                 {
                   id: 4,
                   content: 'Hello world',
-                  author: 'John Doe',
+                  user: 'John Doe',
                   createdAt: '2021-01-01',
                   likes: 0,
                   shares: 0,
@@ -62,7 +62,7 @@ function Dashboard() {
                 {
                   id: 5,
                   content: 'Hello world',
-                  author: 'John Doe',
+                  user: 'John Doe',
                   createdAt: '2021-01-01',
                   likes: 0,
                   shares: 0,

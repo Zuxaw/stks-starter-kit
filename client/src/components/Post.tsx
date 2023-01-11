@@ -7,7 +7,7 @@ type PostProps = {
   likes: number;
   shares: number;
   comments: number;
-  author: string;
+  user: string;
   createdAt: string;
 };
 
