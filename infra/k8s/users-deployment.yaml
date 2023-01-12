@@ -17,7 +17,7 @@ spec:
           image: us.gcr.io/nuit-isen/users
           env:
             - name: MONGO_URI
-              value: "mongodb://users-mongo-srv:27017/users"
+              value: "mongodb://users-mongo-service:27017/users"
 ---
 apiVersion: v1
 kind: Service
