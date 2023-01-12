@@ -40,7 +40,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: users-mongo-srv
+  name: users-mongo-service
 spec:
   type: ClusterIP
   selector:

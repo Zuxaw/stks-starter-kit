@@ -17,7 +17,7 @@ spec:
           image: us.gcr.io/nuit-isen/posts
           env:
             - name: MONGO_URI
-              value: "mongodb://posts-mongo-srv:27017/posts"
+              value: "mongodb://posts-mongo-service:27017/posts"
 ---
 apiVersion: v1
 kind: Service
