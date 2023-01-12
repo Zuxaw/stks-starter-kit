@@ -1,10 +1,11 @@
-FROM node:16-alpine
-
-ENV CI=true
-
+FROM node:19.4.0-alpine
 WORKDIR /app
-COPY package.json ./
-RUN npm install
-COPY ./ ./
 
-CMD [ "npm", "start" ]
+ENV CI true
+ENV NODE_ENV production
+
+COPY package.json yarn.lock tsconfig.json .
+COPY src/ src/
+
+RUN yarn install --production --frozen-lockfile
+CMD ["yarn", "start"]
