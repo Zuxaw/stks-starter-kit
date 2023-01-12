@@ -1,4 +1,4 @@
-apiVersion: skaffold/v3
+apiVersion: skaffold/v2beta3
 kind: Config
 metadata:
   name: nuit-isen
@@ -14,8 +14,16 @@ build:
         manual:
           - src: "***/*.ts"
             dest: .
+    - image: us.gcr.io/nuit-isen/graphql
+      context: backend/graphql
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: "***/*.ts"
+            dest: .
     - image: us.gcr.io/nuit-isen/users
-      context: users-service
+      context: backend/users-service
       docker:
         dockerfile: Dockerfile
       sync:
@@ -23,7 +31,7 @@ build:
           - src: "***/*.ts"
             dest: .
     - image: us.gcr.io/nuit-isen/posts
-      context: posts-service
+      context: backend/posts-service
       docker:
         dockerfile: Dockerfile
       sync:
@@ -31,3 +39,7 @@ build:
           - src: "***/*.ts"
             dest: .
 # test:
+deploy:
+  kubectl:
+    manifests:
+      - ./infra/k8s/*
