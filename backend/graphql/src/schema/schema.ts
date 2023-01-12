@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { GraphQLInt, GraphQLList, GraphQLNonNull, GraphQLObjectType, GraphQLSchema, GraphQLString } from 'graphql';
-import { postType } from './post-srv/postType';
-import { userType } from './user-srv/userType';
+import { postType } from './posts-service/postType';
+import { userType } from './users-service/userType';
 
 const RootQuery = new GraphQLObjectType({
   name: 'RootQueryType',
@@ -10,7 +10,7 @@ const RootQuery = new GraphQLObjectType({
       type: postType,
       args: { _id: { type: GraphQLString } },
       async resolve(parent, args) {
-        const post = await axios.get((process.env.POST_URI || 'http://localhost:5001') + '/api/post/?_id=' + args._id);
+        const post = await axios.get((process.env.POST_URI || 'http://localhost:4011') + '/api/post/?_id=' + args._id);
         return post.data;
       },
     },
@@ -18,21 +18,21 @@ const RootQuery = new GraphQLObjectType({
       type: userType,
       args: { _id: { type: GraphQLString } },
       async resolve(parent, args) {
-        const user = await axios.get((process.env.USER_URI || 'http://localhost:5002') + '/api/user/?_id=' + args._id);
+        const user = await axios.get((process.env.USER_URI || 'http://localhost:4010') + '/api/user/?_id=' + args._id);
         return user.data;
       },
     },
     posts: {
       type: new GraphQLList(postType),
       async resolve(parent, args) {
-        const posts = await axios.get((process.env.POST_URI || 'http://localhost:5001') + '/api/posts');
+        const posts = await axios.get((process.env.POST_URI || 'http://localhost:4011') + '/api/posts');
         return posts.data;
       },
     },
     users: {
       type: new GraphQLList(userType),
       async resolve(parent, args) {
-        const users = await axios.get((process.env.USER_URI || 'http://localhost:5002') + '/api/users');
+        const users = await axios.get((process.env.USER_URI || 'http://localhost:4010') + '/api/users');
         return users.data;
       },
     },
@@ -51,7 +51,7 @@ const Mutation = new GraphQLObjectType({
         profilePicture: { type: GraphQLString },
       },
       async resolve(parent, args) {
-        const user = await axios.post((process.env.USER_URI || 'http://localhost:5002') + '/api/user/create', {
+        const user = await axios.post((process.env.USER_URI || 'http://localhost:4010') + '/api/user/create', {
           username: args.name,
           uid: args.uid,
           email: args.email,
@@ -73,7 +73,7 @@ const Mutation = new GraphQLObjectType({
       },
       async resolve(parent, args) {
         console.log(args.userId);
-        const post = await axios.post((process.env.POST_URI || 'http://localhost:5001') + '/api/post/create', {
+        const post = await axios.post((process.env.POST_URI || 'http://localhost:4011') + '/api/post/create', {
           content: args.content,
           images: args.images,
           likes: args.likes,
