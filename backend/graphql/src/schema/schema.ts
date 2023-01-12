@@ -1,7 +1,7 @@
-import { GraphQLObjectType, GraphQLSchema, GraphQLList, GraphQLString, GraphQLNonNull, GraphQLInt } from 'graphql';
+import axios from 'axios';
+import { GraphQLInt, GraphQLList, GraphQLNonNull, GraphQLObjectType, GraphQLSchema, GraphQLString } from 'graphql';
 import { postType } from './post-srv/postType';
 import { userType } from './user-srv/userType';
-import axios from 'axios';
 
 const RootQuery = new GraphQLObjectType({
   name: 'RootQueryType',
