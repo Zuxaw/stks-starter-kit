@@ -65,7 +65,6 @@ const DashboardHeader = () => {
         <div className="flex-none gap-2 navbar-end">
           <div>
             <select data-choose-theme className="select select-bordered w-full max-w-xs">
-            <option disabled selected>Theme</option>
               <option value="light">Light</option>
               <option value="dark">Dark</option>
               <option value="bumblebee">Bumblebee</option>

@@ -15,14 +15,6 @@ const getPostsQuery = gql`
     posts {
       content
       images
-      likes
-      shares
-      comments
-      createdAt
-      user {
-        username
-        profilePicture
-      }
     }
   }
 `;
@@ -37,11 +29,12 @@ const addPostMutation = gql`
 `;
 
 const addUserMutation = gql`
-  mutation AddBook($email: String!, $profilePicture: String, $username: String) {
-    addUser(email: $email, profilePicture: $profilePicture, username: $username) {
+  mutation AddBook($email: String!,$uid: String!, $profilePicture: String, $username: String) {
+    addUser(email: $email,uid: $uid, profilePicture: $profilePicture, username: $username) {
       _id
       profilePicture
       email
+      uid
       username
     }
   }
