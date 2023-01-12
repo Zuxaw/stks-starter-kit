@@ -1,4 +1,4 @@
-apiVersion: skaffold/v4beta2
+apiVersion: skaffold/v3
 kind: Config
 metadata:
   name: nuit-isen
@@ -6,15 +6,15 @@ build:
   googleCloudBuild:
     projectId: nuit-isen
   artifacts:
-  - image: us.gcr.io/nuit-isen/client
-    context: client
-    docker:
-      dockerfile: Dockerfile
-    sync:
-      manual:
-      - src: "***/*.ts"
-        dest: .
-  - image: us.gcr.io/nuit-isen/users
+    - image: us.gcr.io/nuit-isen/client
+      context: client
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: "***/*.ts"
+            dest: .
+    - image: us.gcr.io/nuit-isen/users
       context: users-service
       docker:
         dockerfile: Dockerfile
@@ -22,7 +22,7 @@ build:
         manual:
           - src: "***/*.ts"
             dest: .
-  - image: us.gcr.io/nuit-isen/posts
+    - image: us.gcr.io/nuit-isen/posts
       context: posts-service
       docker:
         dockerfile: Dockerfile
@@ -31,21 +31,3 @@ build:
           - src: "***/*.ts"
             dest: .
 # test:
-deploy:
-  kubectl:
-    manifests:
-    - infra/k8s/staging/*.yaml
-    - infra/k8s/production/*.yaml
-profiles:
-- name: staging
-  deploy:
-    kubectl:
-      manifests:
-      - infra/k8s/*.yaml
-      - infra/k8s/staging/*.yaml
-- name: production
-  deploy:
-    kubectl:
-      manifests:
-      - infra/k8s/*.yaml
-      - infra/k8s/production/*.yaml
