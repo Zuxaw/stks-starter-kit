@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: users-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: users
+  template:
+    metadata:
+      labels:
+        app: users
+    spec:
+      containers:
+      - name: users
+        image: us.gcr.io/nuit-isen/users
+        env:
+        - name: MONGO_URI
+          value: 'mongodb://users-mongo-srv:27017/users'
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: users-service
+spec:
+  selector:
+    app: users
+  ports: 
+  - name: users
+    protocol: TCP
+    port: 5002
+    targetPort: 5002

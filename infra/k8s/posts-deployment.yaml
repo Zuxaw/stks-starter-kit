@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: posts-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: posts
+  template:
+    metadata:
+      labels:
+        app: posts
+    spec:
+      containers:
+        - name: posts
+          image: us.gcr.io/zuxaw/posts
+          env:
+            - name: MONGO_URI
+              value: 'mongodb://posts-mongo-srv:27017/posts'
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: posts-service
+spec:
+  selector:
+    app: posts
+  ports: 
+    - name: posts
+      protocol: TCP
+      port: 4011
+      targetPort: 4011

@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: graphql-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: graphql
+  template:
+    metadata:
+      labels:
+        app: graphql
+    spec:
+      containers:
+        - name: graphql
+          image: us.gcr.io/nuit-isen/graphql
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: graphql-service
+spec:
+  selector:
+    app: graphql
+  ports:
+    - name: graphql
+      protocol: TCP
+      port: 4000
+      targetPort: 4000
