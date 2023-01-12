@@ -7,5 +7,5 @@ ENV NODE_ENV production
 COPY package.json yarn.lock tsconfig.json .
 COPY src/ src/
 
-RUN yarn install --production --frozen-lockfile
+RUN yarn install --production
 CMD ["yarn", "start"]
