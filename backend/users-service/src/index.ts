@@ -29,8 +29,8 @@ const start = async () => {
     console.error(err);
   }
 
-  app.listen(5002, () => {
-    console.log(getTime() + 'Listening on port 5002!');
+  app.listen(4010, () => {
+    console.log(getTime() + 'Listening on port 4010!');
   });
 };
 
