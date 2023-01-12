@@ -1,0 +1,13 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: staging.zuxaw.fr
+  namespace: cert-manager
+spec:
+  secretName: zuxaw.fr-tls
+  issuerRef:
+    name: cert-manager
+    kind: ClusterIssuer
+  commonName: staging.zuxaw.fr
+  dnsNames:
+    - staging.zuxaw.fr

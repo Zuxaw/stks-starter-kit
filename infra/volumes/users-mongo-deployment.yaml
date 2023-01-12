@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: users-mongo-deployment
+  labels:
+    app: users-mongo
+spec:
+  replicas: 1
+  serviceName: "users-mongo"
+  selector:
+    matchLabels:
+      app: users-mongo
+  template:
+    metadata:
+      labels:
+        app: users-mongo
+    spec:
+      volumes:
+        - name: users-mongo-storage
+          persistentVolumeClaim:
+            claimName: users-db-bs-claim
+      containers:
+        - name: users-mongo
+          image: mongo
+          volumeMounts:
+            - mountPath: "/data/db"
+              name: users-mongo-storage
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: users-db-bs-claim
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: users-mongo-srv
+spec:
+  type: ClusterIP
+  selector:
+    app: users-mongo
+  ports:
+    - name: users-db
+      protocol: TCP
+      port: 27017
+      targetPort: 27017

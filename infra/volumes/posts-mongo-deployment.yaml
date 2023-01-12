@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: posts-mongo-deployment
+  labels:
+    app: posts-mongo
+spec:
+  replicas: 1
+  serviceName: "posts-mongo"
+  selector:
+    matchLabels:
+      app: posts-mongo
+  template:
+    metadata:
+      labels:
+        app: posts-mongo
+    spec:
+      volumes:
+        - name: posts-mongo-storage
+          persistentVolumeClaim:
+            claimName: posts-db-bs-claim
+      containers:
+        - name: posts-mongo
+          image: mongo
+          volumeMounts:
+            - mountPath: "/data/db"
+              name: posts-mongo-storage
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: posts-db-bs-claim
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: posts-mongo-srv
+spec:
+  type: ClusterIP
+  selector:
+    app: posts-mongo
+  ports:
+    - name: posts-db
+      protocol: TCP
+      port: 27017
+      targetPort: 27017

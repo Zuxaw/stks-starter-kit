@@ -42,4 +42,4 @@ build:
 deploy:
   kubectl:
     manifests:
-      - ./infra/k8s/*
+      - ./infra/k8s/*.yaml

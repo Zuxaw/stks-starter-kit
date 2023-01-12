@@ -1,13 +1,13 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: nginx-ingress
+  name: ingress-nginx
   annotations:
     cert-manager.io/cluster-issuer: cert-issuer
-    kubernetes.io/ingress.class: nginx
-    nginx.ingress.kubernetes.io/use-regex: 'true'
-    nginx.ingress.kubernetes.io/enable-cors: 'true'
+    nginx.ingress.kubernetes.io/use-regex: "true"
+    nginx.ingress.kubernetes.io/enable-cors: "true"
 spec:
+  ingressClassName: nginx
   rules:
     - host: staging.zuxaw.fr
       http:
@@ -27,6 +27,6 @@ spec:
                 port:
                   number: 3000
   tls:
-  - hosts:
-    - staging.zuxaw.fr
-    secretName: zuxaw.fr-tls
+    - hosts:
+        - staging.zuxaw.fr
+      secretName: zuxaw.fr-tls
