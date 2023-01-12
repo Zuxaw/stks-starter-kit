@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: communication-mongo-depl
+  labels:
+    app: communication-mongo
+spec:
+  replicas: 1
+  serviceName: 'communication-mongo'
+  selector:
+    matchLabels:
+      app: communication-mongo
+  template:
+    metadata:
+      labels:
+        app: communication-mongo
+    spec:
+      volumes:
+        - name: communication-mongo-storage
+          persistentVolumeClaim:
+            claimName: communication-db-bs-claim
+      containers:
+        - name: communication-mongo
+          image: mongo
+          volumeMounts:
+            - mountPath: '/data/db'
+              name: communication-mongo-storage
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: communication-db-bs-claim
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: communication-mongo-srv
+spec:
+  type: ClusterIP
+  selector:
+    app: communication-mongo
+  ports:
+    - name: communication-db
+      protocol: TCP
+      port: 27017
+      targetPort: 27017

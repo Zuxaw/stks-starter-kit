@@ -1,0 +1,76 @@
+apiVersion: skaffold/v2alpha3
+kind: Config
+deploy:
+  kubectl:
+    manifests:
+      - ./infra/k8s/*
+build:
+  # local:
+  #   push: false
+  googleCloudBuild:
+    projectId: dev-expert-platform
+  artifacts:
+    - image: us.gcr.io/dev-expert-platform/client
+      context: client
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: "***/*.js"
+            dest: .
+    - image: us.gcr.io/dev-expert-platform/chatbot
+      context: chatbot-service
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: "*.py"
+            dest: .
+    - image: us.gcr.io/dev-expert-platform/account
+      context: account-service
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: "***/*.ts"
+            dest: .
+    - image: us.gcr.io/dev-expert-platform/communication
+      context: communication-service
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: "***/*.ts"
+            dest: .
+    - image: us.gcr.io/dev-expert-platform/notification
+      context: notification-service
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: "***/*.ts"
+            dest: .
+    - image: us.gcr.io/dev-expert-platform/payment
+      context: payment-service
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: "***/*.ts"
+            dest: .
+    - image: us.gcr.io/dev-expert-platform/matching
+      context: matching-service
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: "***/*.py"
+            dest: .
+    - image: us.gcr.io/dev-expert-platform/ranking
+      context: ranking-service
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: "***/*.py"
+            dest: .

@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: account-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: account
+  template:
+    metadata:
+      labels:
+        app: account
+    spec:
+      containers:
+        - name: account
+          image: us.gcr.io/dev-expert-platform/account
+          env:
+            - name: MONGO_URI
+              value: 'mongodb://account-mongo-srv:27017/account'
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: account-srv
+spec:
+  selector:
+    app: account
+  ports: 
+    - name: account
+      protocol: TCP
+      port: 5001
+      targetPort: 5001

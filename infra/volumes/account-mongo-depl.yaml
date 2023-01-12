@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: account-mongo-depl
+  labels:
+    app: account-mongo
+spec:
+  replicas: 1
+  serviceName: 'account-mongo'
+  selector:
+    matchLabels:
+      app: account-mongo
+  template:
+    metadata:
+      labels:
+        app: account-mongo
+    spec:
+      volumes:
+        - name: account-mongo-storage
+          persistentVolumeClaim:
+            claimName: account-db-bs-claim
+      containers:
+        - name: account-mongo
+          image: mongo
+          volumeMounts:
+            - mountPath: '/data/db'
+              name: account-mongo-storage
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: account-db-bs-claim
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: account-mongo-srv
+spec:
+  type: ClusterIP
+  selector:
+    app: account-mongo
+  ports:
+    - name: account-db
+      protocol: TCP
+      port: 27017
+      targetPort: 27017

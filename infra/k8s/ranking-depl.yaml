@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ranking-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ranking
+  template:
+    metadata:
+      labels:
+        app: ranking
+    spec:
+      containers:
+        - name: ranking
+          image: us.gcr.io/dev-expert-platform/ranking
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ranking-srv
+spec:
+  selector:
+    app: ranking
+  ports:
+    - name: ranking
+      protocol: TCP
+      port: 5006
+      targetPort: 5006

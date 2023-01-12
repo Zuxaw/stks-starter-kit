@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: chatbot-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: chatbot
+  template:
+    metadata:
+      labels:
+        app: chatbot
+    spec:
+      containers:
+        - name: chatbot
+          image: us.gcr.io/dev-expert-platform/chatbot
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: chatbot-srv
+spec:
+  selector:
+    app: chatbot
+  ports:
+    - name: chatbot
+      protocol: TCP
+      port: 5000
+      targetPort: 5000

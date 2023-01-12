@@ -1,0 +1,81 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-srv
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/use-regex: 'true'
+    nginx.ingress.kubernetes.io/enable-cors: 'true'
+spec:
+  rules:
+    - host: dev-expert-platform.fr
+      http:
+        paths:
+          - path: /predict
+            pathType: Prefix
+            backend:
+              service:
+                name: chatbot-srv
+                port:
+                  number: 5000
+          - path: /api/account/?(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: account-srv
+                port:
+                  number: 5001
+          - path: /api/chat/?(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: communication-socket-srv
+                port:
+                  number: 5002
+          - path: /api/communication/?(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: communication-srv
+                port:
+                  number: 5003
+          - path: /api/notification/?(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: notification-socket-srv
+                port:
+                  number: 5004
+          - path: /api/matching/?(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: matching-srv
+                port:
+                  number: 5005
+          - path: /api/ranking/?(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: ranking-srv
+                port:
+                  number: 5006
+          - path: /api/payment/?(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: payment-srv
+                port:
+                  number: 5007
+          - path: /?(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: client-srv
+                port:
+                  number: 3000
+  tls:
+  - hosts:
+    - dev-expert-platform.fr
+    secretName: dev-expert-platform.fr-tls
