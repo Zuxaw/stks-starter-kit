@@ -1,9 +1,20 @@
-import Postfield from '~/components/PostInput';
+import { useQuery } from '@apollo/client';
+import Loading from '~/appkit/Loading';
 import TabsCard from '~/appkit/TabsCard';
 import DashboardHeader from '~/components/header/DashboardHeader';
 import Post from '~/components/Post';
+import Postfield from '~/components/PostInput';
+import { getPostsQuery } from '~/queries/queries';
+import Error from '~/appkit/Error';
 
 function Dashboard() {
+  const { loading, error, data } = useQuery(getPostsQuery);
+  console.log(data);
+  console.log(loading);
+  console.log(error);
+  if (loading) return <Loading />;
+  if (error) return <Error error={error.message} />;
+
   return (
     <>
       <div className="relative">

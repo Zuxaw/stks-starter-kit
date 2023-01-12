@@ -45,13 +45,15 @@ const Mutation = new GraphQLObjectType({
     addUser: {
       type: userType,
       args: {
-        username: { type: new GraphQLNonNull(GraphQLString) },
+        username: { type: GraphQLString },
+        uid: { type: new GraphQLNonNull(GraphQLString) },
         email: { type: new GraphQLNonNull(GraphQLString) },
         profilePicture: { type: GraphQLString },
       },
       async resolve(parent, args) {
         const user = await axios.post((process.env.USER_URI || 'http://localhost:5002') + '/api/user/create', {
           username: args.name,
+          uid: args.uid,
           email: args.email,
           profilePicture: args.profilePicture,
         });

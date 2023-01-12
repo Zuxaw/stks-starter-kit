@@ -2,6 +2,7 @@ import mongoose from 'mongoose';
 
 interface UserAttrs {
   username?: string;
+  uid: string;
   email: string;
   profilePicture?: string;
   createdAt: string;
@@ -13,6 +14,7 @@ interface UserModel extends mongoose.Model<UserDoc> {
 
 interface UserDoc extends mongoose.Document {
   username?: string;
+  uid: string;
   email: string;
   profilePicture?: string;
   createdAt: string;
@@ -21,9 +23,15 @@ interface UserDoc extends mongoose.Document {
 const userSchema = new mongoose.Schema(
   {
     username: String,
+    uid: {
+      type: String,
+      required: true,
+      unique: true,
+    },
     email: {
       type: String,
       required: true,
+      unique: true,
     },
     profilePicture: String,
     createdAt: {
@@ -31,7 +39,7 @@ const userSchema = new mongoose.Schema(
       default: new Date().toString(),
     },
   },
-  { versionKey: false }
+  { versionKey: false },
 );
 userSchema.statics.build = (attrs: UserAttrs) => {
   return new User(attrs);

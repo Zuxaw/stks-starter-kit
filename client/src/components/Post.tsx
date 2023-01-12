@@ -19,8 +19,8 @@ const Post: React.FC<{ posts: PostProps[] }> = ({ posts }) => {
   };
   return (
     <>
-      {posts.map((post) => (
-        <div className="card card-compact w-full mt-5 bg-base-100 shadow-xl border border-base-300">
+      {posts.map((post,index) => (
+        <div key={index} className="card card-compact w-full mt-5 bg-base-100 shadow-xl border border-base-300">
           <div className="card-body ">
             <p className="prose">{post.content}</p>
             {post.images && post.images.length > 0 && (
