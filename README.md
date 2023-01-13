@@ -32,7 +32,7 @@ To run the local env you need no to `yarn install` in each micro services, once 
 
 To trigger the pipeline of the staging env you can use `skaffold run -p staging`
 
-To trigger the pipeline of the prod env you can use `skaffold run -p prod`
+To trigger the pipeline of the prod env you can use `skaffold run -p production`
 
 ## Tech
 
