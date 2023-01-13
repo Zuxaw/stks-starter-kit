@@ -16,12 +16,16 @@ done
 
 echo "Mongodb container started!"
 
-#for folder in ./backend/*
+folders=($(find . -type d -name backend))
 
-folders=("/backend/*/" "/client/")
+gnome-terminal -e "bash -c 'cd ./client && yarn dev; exec bash'" &
 
 for folder in "${folders[@]}"
-
 do
-  (cd $folder && yarn dev) &
+  for subfolder in "$folder"/*/
+  do
+    (cd "$subfolder" && yarn dev) &
+  done
 done
+
+echo "Done running"
