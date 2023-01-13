@@ -34,6 +34,9 @@ To trigger the pipeline of the staging env you can use `skaffold run -p staging`
 
 To trigger the pipeline of the prod env you can use `skaffold run -p production`
 
+<img width="508" alt="image" src="https://user-images.githubusercontent.com/82362374/212363233-be6a8483-b956-4b83-8f27-36932e080540.png">
+
+
 ## Tech
 
 - For the front it's react + vite + tailwind + daisyui + apollo
