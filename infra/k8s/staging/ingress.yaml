@@ -29,4 +29,4 @@ spec:
   tls:
     - hosts:
         - staging.zuxaw.fr
-      secretName: zuxaw.fr-tls
+      secretName: staging.zuxaw.fr-tls

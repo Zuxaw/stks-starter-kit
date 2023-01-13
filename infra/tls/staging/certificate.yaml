@@ -6,7 +6,7 @@ metadata:
 spec:
   secretName: zuxaw.fr-tls
   issuerRef:
-    name: cert-manager
+    name: cert-issuer
     kind: ClusterIssuer
   commonName: staging.zuxaw.fr
   dnsNames:

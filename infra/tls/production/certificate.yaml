@@ -10,4 +10,4 @@ spec:
     kind: ClusterIssuer
   commonName: zuxaw.fr
   dnsNames:
-  - zuxaw.fr
+    - zuxaw.fr
