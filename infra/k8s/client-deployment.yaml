@@ -15,8 +15,12 @@ spec:
       containers:
         - name: client
           image: us.gcr.io/nuit-isen/client
-          ports:
-            - containerPort: 3000
+          env:
+            - name: API_GRAPHQL_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: api-urls
+                  key: API_GRAPHQL_URL
 ---
 apiVersion: v1
 kind: Service

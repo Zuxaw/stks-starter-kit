@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: api-urls
+data:
+  API_GRAPHQL_URL: "http://graphql-service.default.svc.cluster.local:4000"
+  API_USERS_URL: "http://users-service.default.svc.cluster.local:4010"
+  API_POSTS_URL: "http://posts-service.default.svc.cluster.local:4011"
