@@ -16,7 +16,7 @@ To init the cloud env you need to setup first your cluster kubernetes on gcp the
 
 ```
 gcloud container clusters get-credentials staging
-gcloud container clusters get-credentials prod
+gcloud container clusters get-credentials production
 ```
 
 Once it's setup you can easly switch between 
