@@ -3,6 +3,7 @@ import { User } from 'firebase/auth';
 import { useState } from 'react';
 import { useQuery } from 'react-query';
 import { Outlet, useNavigate } from 'react-router-dom';
+import Theme from '~/appkit/Theme';
 import { getUser, useAuth } from '~/lib/firebase';
 
 const DashboardHeader = () => {
@@ -63,16 +64,7 @@ const DashboardHeader = () => {
           </div>
         </div>
         <div className="flex-none gap-2 navbar-end">
-          <div>
-            <select data-choose-theme className="select select-bordered w-full max-w-xs">
-              <option value="light">Light</option>
-              <option value="dark">Dark</option>
-              <option value="bumblebee">Bumblebee</option>
-              <option value="emerald">Emerald</option>
-              <option value="corporate">Corporate</option>
-              <option value="synthwave">Synthwave</option>
-            </select>
-          </div>
+          <Theme />
           <div className="dropdown dropdown-end">
             <label
               tabIndex={0}

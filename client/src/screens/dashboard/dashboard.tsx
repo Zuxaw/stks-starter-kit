@@ -2,6 +2,7 @@ import { useQuery } from '@apollo/client';
 import Error from '~/appkit/Error';
 import Loading from '~/appkit/Loading';
 import TabsCard from '~/appkit/TabsCard';
+import Theme from '~/appkit/Theme';
 import DashboardHeader from '~/components/header/DashboardHeader';
 import Post from '~/components/Post';
 import Postfield from '~/components/PostInput';
