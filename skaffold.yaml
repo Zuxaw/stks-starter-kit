@@ -2,6 +2,19 @@ apiVersion: skaffold/v2beta3
 kind: Config
 metadata:
   name: nuit-isen
+profiles:
+  - name: production
+    deploy:
+      kubeContext: gke_nuit-isen_europe-west1-b_production
+      kubectl:
+        manifests:
+          - ./infra/k8s/*-deployment.yaml
+  - name: staging
+    deploy:
+      kubeContext: gke_nuit-isen_europe-west1-b_staging
+      kubectl:
+        manifests:
+          - ./infra/k8s/*-deployment.yaml
 build:
   googleCloudBuild:
     projectId: nuit-isen
@@ -38,8 +51,4 @@ build:
         manual:
           - src: "***/*.ts"
             dest: .
-# test:
-deploy:
-  kubectl:
-    manifests:
-      - ./infra/k8s/*.yaml
+
