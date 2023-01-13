@@ -6,13 +6,11 @@ import Main from '~/components/root/Main';
 
 const queryClient = new QueryClient();
 const cache = new InMemoryCache();
-
+console.log('env:' + process.env.GRAPHQL_URI);
 const apolloClient = new ApolloClient({
   cache,
-  // uri: (process.env.API_GRAPHQL_URL
-  //   ? process.env.API_GRAPHQL_URL + '/graphql'
-  //   : import.meta.env.VITE_GRAPHQL_URI) as string,
-  uri: 'http://graphql-service.default.svc.cluster.local:4000/graphql',
+  // uri:( process.env.GRAPHQL_URI|| 'http://localhost:4000/graphql') as string,
+  uri: 'https://staging.zuxaw.fr/graphql' as string,
 });
 
 export const App = () => {

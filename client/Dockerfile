@@ -4,7 +4,7 @@ WORKDIR /app
 ENV CI true
 ENV NODE_ENV production
 
-COPY .env.local index.html .
+COPY .env.local index.html ./
 COPY dist/ dist/
 
 RUN yarn global add serve
