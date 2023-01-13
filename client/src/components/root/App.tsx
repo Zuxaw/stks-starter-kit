@@ -9,7 +9,9 @@ const cache = new InMemoryCache();
 
 const apolloClient = new ApolloClient({
   cache,
-  uri: import.meta.env.VITE_GRAPHQL_URI as string,
+  uri: (process.env.API_GRAPHQL_URL
+    ? process.env.API_GRAPHQL_URL + '/graphql'
+    : import.meta.env.VITE_GRAPHQL_URI) as string,
 });
 
 export const App = () => {
