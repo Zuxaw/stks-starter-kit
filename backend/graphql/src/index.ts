@@ -6,7 +6,6 @@ import { schema } from './schema/schema';
 
 const app = express();
 app.set('trust proxy', true);
-//cors middleware
 app.use(json(), cors());
 
 app.use(
