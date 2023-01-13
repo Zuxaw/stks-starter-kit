@@ -9,9 +9,10 @@ const cache = new InMemoryCache();
 
 const apolloClient = new ApolloClient({
   cache,
-  uri: (process.env.API_GRAPHQL_URL
-    ? process.env.API_GRAPHQL_URL + '/graphql'
-    : import.meta.env.VITE_GRAPHQL_URI) as string,
+  // uri: (process.env.API_GRAPHQL_URL
+  //   ? process.env.API_GRAPHQL_URL + '/graphql'
+  //   : import.meta.env.VITE_GRAPHQL_URI) as string,
+  uri: 'http://graphql-service.default.svc.cluster.local:4000/graphql',
 });
 
 export const App = () => {
